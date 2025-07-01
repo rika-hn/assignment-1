@@ -9,12 +9,15 @@ export const App = () => {
 
   return (
     <>
-      {records.map((record, key) => (
-        <div key={key} style={{ display: "flex" }}>
-          <p style={{ paddingRight: "4px" }}>{records[key].title}</p>
-          <p>{records[key].time}時間</p>
-        </div>
-      ))}
+      <h1>学習記録一覧</h1>
+      <div>
+        {records.map((record, key) => (
+          <div key={key} style={{ display: "flex" }}>
+            <p style={{ paddingRight: "4px" }}>{records[key].title}</p>
+            <p>{records[key].time}時間</p>
+          </div>
+        ))}
+      </div>
     </>
   );
 };
