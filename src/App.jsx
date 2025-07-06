@@ -3,26 +3,31 @@ import React from "react";
 import { useState } from "react";
 
 export const App = () => {
-  const [studyContent, setStudyContent] = useState("");
-  const [studyTotalTime, setStudyTotalTime] = useState("");
+  const [content, setContent] = useState("");
+  const [time, setTime] = useState("");
 
   const [records, setRecords] = useState([]);
 
-  const onChangeStudyContent = (event) => {
-    setStudyContent(event.target.value);
+  const onChangeContent = (event) => {
+    setContent(event.target.value);
   };
 
-  const onChangeStudyTotalTime = (event) => {
-    setStudyTotalTime(event.target.value);
+  const onChangeTime = (event) => {
+    setTime(event.target.value);
   };
 
   const onClickRegister = () => {
-    if (studyContent === "") return;
-    const newStudyContent = [...records, studyContent];
-    const newStudyTotalTime = [...records, studyTotalTime];
-    setRecords([newStudyContent], [newStudyTotalTime]);
-    setStudyContent("");
-    setStudyTotalTime("");
+    if (content === "") return;
+
+    const newRecord = {
+      content,
+      time,
+    };
+
+    setRecords([...records, newRecord]);
+
+    setContent("");
+    setTime("");
   };
 
   return (
@@ -30,27 +35,19 @@ export const App = () => {
       <h1>学習記録一覧</h1>
       <div>
         学習内容
-        <input
-          type="text"
-          value={studyContent}
-          onChange={onChangeStudyContent}
-        />
+        <input type="text" value={content} onChange={onChangeContent} />
       </div>
       <div>
         学習時間
-        <input
-          type="number"
-          value={studyTotalTime}
-          onChange={onChangeStudyTotalTime}
-        />
+        <input type="number" value={time} onChange={onChangeTime} />
         時間
       </div>
-      <div>入力されている学習内容: {studyContent}</div>
-      <div>入力されている時間: {studyTotalTime}</div>
+      <div>入力されている学習内容: {content}</div>
+      <div>入力されている時間: {time}時間</div>
       <div>
         {records.map((record, key) => (
-          <div key={key} style={{ display: "flex" }}>
-            <p>{records}</p>
+          <div key={key} style={{ display: "flex", mt: "0" }}>
+            <p>{record.content}</p> <p>{record.time}時間</p>
           </div>
         ))}
       </div>
