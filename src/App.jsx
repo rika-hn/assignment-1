@@ -6,6 +6,7 @@ export const App = () => {
   const [content, setContent] = useState("");
   const [time, setTime] = useState("");
 
+  // 配列ではなくオブジェクトになっていた
   const [records, setRecords] = useState([]);
 
   const onChangeContent = (event) => {
@@ -17,8 +18,6 @@ export const App = () => {
   };
 
   const onClickRegister = () => {
-    if (content === "") return;
-
     const newRecord = {
       content,
       time,
@@ -27,7 +26,7 @@ export const App = () => {
     setRecords([...records, newRecord]);
 
     setContent("");
-    setTime("");
+    setTime("0");
   };
 
   return (
