@@ -5,8 +5,8 @@ import { useState } from "react";
 export const App = () => {
   const [content, setContent] = useState("");
   const [time, setTime] = useState("");
-
   const [records, setRecords] = useState([]);
+  const [error, setError] = useState("");
 
   const onChangeContent = (event) => {
     setContent(event.target.value);
@@ -17,13 +17,19 @@ export const App = () => {
   };
 
   const onClickRegister = () => {
+    if (content === "" || time === "") {
+      setError("入力されていない項目があります");
+      return;
+    } else {
+      setError("");
+    }
+
     const newRecord = {
       content,
       time,
     };
 
     setRecords([...records, newRecord]);
-
     setContent("");
     setTime("0");
   };
@@ -50,6 +56,7 @@ export const App = () => {
         ))}
       </div>
       <button onClick={onClickRegister}>登録</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </>
   );
 };
