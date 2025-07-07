@@ -6,7 +6,6 @@ export const App = () => {
   const [content, setContent] = useState("");
   const [time, setTime] = useState("");
 
-  // 配列ではなくオブジェクトになっていた
   const [records, setRecords] = useState([]);
 
   const onChangeContent = (event) => {
