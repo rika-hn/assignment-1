@@ -8,11 +8,14 @@ export const App = () => {
   const [records, setRecords] = useState([]);
   const [error, setError] = useState("");
   const [totalTime, setTotalTime] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getRecords = async () => {
+      setIsLoading(true);
       const records = await getAllRecords();
       setRecords(records);
+      setIsLoading(false);
       console.log(records);
     };
     getRecords();
@@ -67,14 +70,19 @@ export const App = () => {
       </div>
       <div>入力されている学習内容: {content}</div>
       <div>入力されている時間: {time}時間</div>
-      <div>
-        {records.map((record, id) => (
-          <div id={id} style={{ display: "flex", mt: "0" }}>
-            <p style={{ p: "0" }}>{record.content}</p>
-            <p style={{ px: "0" }}>{record.time}時間</p>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <p>ローディング中</p>
+      ) : (
+        <div>
+          {records.map((record, id) => (
+            <div key={id} style={{ display: "flex", mt: "0" }}>
+              <p style={{ p: "0" }}>{record.content}</p>
+              <p style={{ px: "0" }}>{record.time}時間</p>
+            </div>
+          ))}
+        </div>
+      )}
+
       <button onClick={onClickRegister}>登録</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <p>合計時間：{totalTime} / 1000(h)</p>
