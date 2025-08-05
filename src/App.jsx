@@ -69,7 +69,7 @@ export const App = () => {
       <div>入力されている時間: {time}時間</div>
       <div>
         {records.map((record, id) => (
-          <div key={id} style={{ display: "flex", mt: "0" }}>
+          <div id={id} style={{ display: "flex", mt: "0" }}>
             <p style={{ p: "0" }}>{record.content}</p>
             <p style={{ px: "0" }}>{record.time}時間</p>
           </div>
