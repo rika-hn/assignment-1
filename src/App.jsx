@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { getAllRecords } from "./utils/supabaseFunction";
+import { supabase } from "./utils/supabase";
 
 export const App = () => {
   const [content, setContent] = useState("");
@@ -29,13 +30,23 @@ export const App = () => {
     setTime(event.target.value);
   };
 
-  const onClickRegister = () => {
+  const onClickRegister = async () => {
     if (content === "" || time === "") {
       setError("入力されていない項目があります");
       return;
     } else {
       setError("");
     }
+
+    const { error } = await supabase
+      .from("study-record")
+      .insert([{ content, time }]);
+    if (error) {
+      console.error("データ追加エラー:", error);
+      return;
+    }
+
+    await fetchData();
 
     const newRecord = {
       content,
@@ -52,8 +63,6 @@ export const App = () => {
       0
     );
     setTotalTime(totalTime);
-
-    console.log(data);
   };
 
   return (
