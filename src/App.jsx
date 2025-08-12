@@ -67,34 +67,54 @@ export const App = () => {
 
   return (
     <>
-      <h1>学習記録一覧</h1>
-      <div>
+      <h1 className="text-xl m-2">学習記録一覧</h1>
+      <div className="flex items-center ml-2">
         学習内容
-        <input type="text" value={content} onChange={onChangeContent} />
+        <input
+          type="text"
+          class="block w-40 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
+          value={content}
+          onChange={onChangeContent}
+        />
       </div>
-      <div>
+      <div className="flex items-center ml-2 mb-4">
         学習時間
-        <input type="number" value={time} onChange={onChangeTime} />
+        <input
+          type="number"
+          class="block w-24 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
+          value={time}
+          onChange={onChangeTime}
+        />
         時間
       </div>
-      <div>入力されている学習内容: {content}</div>
-      <div>入力されている時間: {time}時間</div>
+      <div className="ml-2">入力されている学習内容: {content}</div>
+      <div className="ml-2">入力されている時間: {time}時間</div>
       {isLoading ? (
-        <p>ローディング中</p>
+        <p className="m-2 mb-4">ローディング中</p>
       ) : (
-        <div>
+        <div className="m-2 mt-4">
           {records.map((record, id) => (
-            <div key={id} style={{ display: "flex", mt: "0" }}>
-              <p style={{ p: "0" }}>{record.content}</p>
-              <p style={{ px: "0" }}>{record.time}時間</p>
+            <div key={id} className="flex mb-2 items-center">
+              <p className="w-32">{record.content}</p>
+              <p className="w-32">{record.time}時間</p>
+              <button className="w-14 group relative h-8 overflow-hidden rounded-md bg-red-500 px-2 text-neutral-50 transition">
+                <span className="text-sm">削除</span>
+                <div className="absolute inset-0 h-full w-0 bg-white/30 transition-[width] group-hover:w-full"></div>
+              </button>
             </div>
           ))}
         </div>
       )}
 
-      <button onClick={onClickRegister}>登録</button>
+      <button
+        onClick={onClickRegister}
+        className="group relative h-8 overflow-hidden rounded-md bg-blue-500 px-3 text-neutral-50 transition ml-2 my-4"
+      >
+        <span className="text-sm">登録</span>
+        <div className="absolute inset-0 h-full w-0 bg-white/30 transition-[width] group-hover:w-full"></div>
+      </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <p>合計時間：{totalTime} / 1000(h)</p>
+      <p className="m-2">合計時間：{totalTime} / 1000(h)</p>
     </>
   );
 };
