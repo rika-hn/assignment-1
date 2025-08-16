@@ -46,14 +46,13 @@ export const App = () => {
       return;
     }
 
-    await fetchData();
-
     const newRecord = {
       content,
       time,
     };
 
     setRecords([...records, newRecord]);
+
     setContent("");
     setTime("0");
 
@@ -65,6 +64,22 @@ export const App = () => {
     setTotalTime(totalTime);
   };
 
+  // const onClickDelete = async (content, time) => {
+  //   const records = await supabase
+  //     .from("study-record")
+  //     .delete()
+  //     .match({ content, time });
+  //   return records.data;
+  // };
+
+  const onClickDelete = async (id) => {
+    const newRecords = [...records];
+    newRecords.splice(id, 1);
+    setRecords(newRecords);
+
+    // deleteRecords(id);
+  };
+
   return (
     <>
       <h1 className="text-xl m-2">学習記録一覧</h1>
@@ -72,7 +87,7 @@ export const App = () => {
         学習内容
         <input
           type="text"
-          class="block w-40 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
+          className="block w-40 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
           value={content}
           onChange={onChangeContent}
         />
@@ -81,7 +96,7 @@ export const App = () => {
         学習時間
         <input
           type="number"
-          class="block w-24 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
+          className="block w-24 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
           value={time}
           onChange={onChangeTime}
         />
@@ -97,7 +112,10 @@ export const App = () => {
             <div key={id} className="flex mb-2 items-center">
               <p className="w-32">{record.content}</p>
               <p className="w-32">{record.time}時間</p>
-              <button className="w-14 group relative h-8 overflow-hidden rounded-md bg-red-500 px-2 text-neutral-50 transition">
+              <button
+                onClick={() => onClickDelete(id)}
+                className="w-14 group relative h-8 overflow-hidden rounded-md bg-red-500 px-2 text-neutral-50 transition"
+              >
                 <span className="text-sm">削除</span>
                 <div className="absolute inset-0 h-full w-0 bg-white/30 transition-[width] group-hover:w-full"></div>
               </button>
