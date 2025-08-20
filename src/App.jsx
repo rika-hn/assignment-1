@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { getAllRecords } from "./utils/supabaseFunction";
+import { getAllRecords, deleteRecords } from "./utils/supabaseFunction";
 import { supabase } from "./utils/supabase";
 
 export const App = () => {
@@ -64,20 +64,11 @@ export const App = () => {
     setTotalTime(totalTime);
   };
 
-  // const onClickDelete = async (content, time) => {
-  //   const records = await supabase
-  //     .from("study-record")
-  //     .delete()
-  //     .match({ content, time });
-  //   return records.data;
-  // };
-
   const onClickDelete = async (id) => {
     const newRecords = [...records];
     newRecords.splice(id, 1);
     setRecords(newRecords);
-
-    // deleteRecords(id);
+    deleteRecords(id);
   };
 
   return (
@@ -113,7 +104,8 @@ export const App = () => {
               <p className="w-32">{record.content}</p>
               <p className="w-32">{record.time}時間</p>
               <button
-                onClick={() => onClickDelete(id)}
+                onClick={() => onClickDelete(record.id)}
+                // onClick={() => onClickDelete(id)}
                 className="w-14 group relative h-8 overflow-hidden rounded-md bg-red-500 px-2 text-neutral-50 transition"
               >
                 <span className="text-sm">削除</span>
