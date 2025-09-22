@@ -34,3 +34,6 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
+
+      - name: Install dependencies
+        run: npm install
