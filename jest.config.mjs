@@ -1,7 +1,10 @@
 export default {
   testEnvironment: "jsdom",
-  moduleNameMapper: {
-    "\\.(css|less)$": "identity-obj-proxy",
+  transform: {
+    "^.+\\.[tj]sx?$": "babel-jest", // ← これが必要
   },
-  setupFilesAfterEnv: ["./jest.setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  transformIgnorePatterns: [
+    "node_modules/(?!(@supabase)/)", // supabase-js もトランスパイル対象に含める
+  ],
 };

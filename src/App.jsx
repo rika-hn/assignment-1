@@ -75,23 +75,27 @@ export const App = () => {
     <>
       <h1 className="text-xl m-2">学習記録一覧</h1>
       <div className="flex items-center ml-2">
-        学習内容
-        <input
-          type="text"
-          className="block w-40 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
-          value={content}
-          onChange={onChangeContent}
-        />
+        <label>
+          学習内容
+          <input
+            type="text"
+            className="block w-40 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
+            value={content}
+            onChange={onChangeContent}
+          />
+        </label>
       </div>
       <div className="flex items-center ml-2 mb-4">
-        学習時間
-        <input
-          type="number"
-          className="block w-24 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
-          value={time}
-          onChange={onChangeTime}
-        />
-        時間
+        <label>
+          学習時間
+          <input
+            type="number"
+            className="block w-24 p-2 m-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500"
+            value={time}
+            onChange={onChangeTime}
+          />
+          時間
+        </label>
       </div>
       <div className="ml-2">入力されている学習内容: {content}</div>
       <div className="ml-2">入力されている時間: {time}時間</div>
@@ -100,7 +104,11 @@ export const App = () => {
       ) : (
         <div className="m-2 mt-4">
           {records.map((record, id) => (
-            <div key={id} className="flex mb-2 items-center">
+            <div
+              key={id}
+              className="flex mb-2 items-center"
+              data-testid="record-item"
+            >
               <p className="w-32">{record.content}</p>
               <p className="w-32">{record.time}時間</p>
               <button
@@ -128,3 +136,5 @@ export const App = () => {
     </>
   );
 };
+
+export default App;
