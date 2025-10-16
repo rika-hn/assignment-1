@@ -113,7 +113,6 @@ export const App = () => {
               <p className="w-32">{record.time}時間</p>
               <button
                 onClick={() => onClickDelete(record.id)}
-                // onClick={() => onClickDelete(id)}
                 className="w-14 group relative h-8 overflow-hidden rounded-md bg-red-500 px-2 text-neutral-50 transition"
               >
                 <span className="text-sm">削除</span>
