@@ -71,6 +71,14 @@ export const App = () => {
     deleteRecords(id);
   };
 
+  useEffect(() => {
+    const total = records.reduce(
+      (sum, record) => sum + (Number(record.time) || 0),
+      0
+    );
+    setTotalTime(total);
+  }, [records]);
+
   return (
     <>
       <h1 className="text-xl m-2">学習記録一覧</h1>
