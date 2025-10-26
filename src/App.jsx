@@ -65,10 +65,13 @@ export const App = () => {
   };
 
   const onClickDelete = async (id) => {
-    const newRecords = [...records];
-    newRecords.splice(id, 1);
+    // const newRecords = [...records];
+    // newRecords.splice(id, 1);
+    // setRecords(newRecords);
+    // deleteRecords(id);
+    const newRecords = records.filter((record) => record.id !== id);
     setRecords(newRecords);
-    deleteRecords(id);
+    await deleteRecords(id);
   };
 
   useEffect(() => {
